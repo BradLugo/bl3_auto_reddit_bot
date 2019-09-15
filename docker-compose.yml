@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  redditbot:
+    container_name: redditbot
+    build: .
+    image: webapp:tag
+    networks:
+      bl3autoredditbot: {}
+  postgres:
+    container_name: postgres
+    image: postgres/postgres:12-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./cockroach-data/roach1:/cockroach/cockroach-data
+    networks:
+      bl3autoredditbot: {}
+
+networks:
+  bl3autoredditbot:
+    driver: bridge
